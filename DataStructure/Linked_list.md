@@ -68,3 +68,4 @@
       self.nodeCount += 1 #nodeCount를 1개 늘림.
       return True
       
+      
