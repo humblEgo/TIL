@@ -67,6 +67,7 @@
       
       self.nodeCount += 1 #nodeCount를 1개 늘림.
       return True
+   </pre>
 ----    
  2. Dummy node를 활용한 연결리스트
   - 기존에는 n번째에 노드를 insert할 때 getAt 메서드로 처음부터 n번째까지 노드를 순차적으로 확인해야하므로 삽입과 삭제가 유연하다는 연결리스트의 특징이 반감된다. 이에 특정 노드의 뒤에 삽입 혹은 삭제하는 메서드를 insertAfter(prev, newNode), popAfter(prev)작성하는 방법을 고려하였다.
@@ -123,11 +124,18 @@
           
       def popAfter(self, prev): #prev의 다음 node를 삭제하고, 그 node의 data를 리턴
           curr = prev.next 
-         if curr == None: #prev가 마지막 node일 때, prev.next == None 일 때 return NOne
-            return None   
-         if curr == self.tail: #리스트의 맨 끝이 node를 삭제할 때 tail 조정.
-            self.tail == prev
-         prev.next = curr.next
-         return curr.data
+          if curr == self.head: #DummyNode를 삭제할 경우.
+              return None   
+          if curr == self.tail: #리스트의 맨 끝이 node를 삭제할 때 tail 조정.
+              self.tail = prev
+          prev.next = curr.next
+          self.nodeCount =- 1
+          return curr.data
+          
+       def popAt(self, pos):
+           if pos <1 or pos > self.nodeCount:
+               raise IndexError 
+           prev = self.getAt(pos-1)
+           return self.popAfter(prev)   
    </pre>
   
