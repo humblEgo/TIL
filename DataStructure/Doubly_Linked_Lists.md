@@ -21,7 +21,7 @@
          self.tail.prev = self.head
          self.tail.next = None
          
-     def traverse(self):
+     def traverse(self):     #이중연결리스트를 head에서 tail까지 순회하며 리스트로 값을 반환
          result = []
          curr = self.head
          while curr.next.next:
@@ -29,7 +29,7 @@
              result.append(curr.data)
          return result
          
-     def reverse(self):
+     def reverse(self):     #이중연결리스트를 tail에서 head 방향으로 순회하며 리스트로 값을 반환
          result = []
          curr = self.tail
          while curr.prev.prev:
@@ -37,21 +37,21 @@
              result.append(curr.data)
          return result
          
-     def insertAfter(self, prev, newNode):
+     def insertAfter(self, prev, newNode): #특정 노드 바로 뒤에 새로운 노드를 삽입
          next = prev.next
          newNode.prev = prev
-         newNode.next = enxt
+         newNode.next = next
          prev.next = newNode
          next.prev = newNode
          self.nodeCount += 1
          return True
          
-     def getAt(self, pos):
+     def getAt(self, pos):                 #head로부터 pos번째에 위치한 노드를 불러옴
          if pos < 0 or pos > self.nodeCount:
              return None
          
          i = 0
-         if pos > self.nodeCount//2:                 #pos 값에 따라 값 검색 방향 설정
+         if pos > self.nodeCount//2:                 #pos 값에 따라 값 검색 방향 설정하여 조금 더 효율화
              curr = self.tail
              while i < self.nodeCount - pos + 1:
                  curr = curr.prev
@@ -63,7 +63,7 @@
                  i += 1
              return curr
          
-     def insertAt(self, pos, newNode):
+     def insertAt(self, pos, newNode):   #pos번째에 노드를 삽입
          if pos < 1 or pos > self.nodeCount + 1:
              return False
          
@@ -72,10 +72,8 @@
          
      def insertBefore(self, enxt, newNode)
      
-     def popAfter(self, prev):
-         if prev is self.tail:
-             return False
-         if prev == self.tail.prev:
+     def popAfter(self, prev): #특정 값 다음에 위치한 노드를 삭제하며 값을 반환
+         if prev == self.tail or prev == self.tail.prev:
              return False
          curr = prev.next
          curr.next.prev = prev
@@ -84,9 +82,7 @@
          return curr.data
 
      def popBefore(self, next):
-         if next is self.head:
-             return False
-         if next == self.head.next:
+         if next == self.head or next == self.head.next:
              return False
          curr = next.prev
          curr.prev.next = next
@@ -95,6 +91,19 @@
          return curr.data
       
       def popAt(self, pos)
+          if pos < 1 or pos > self.nodeCount:
+              raise IndexError
+          prev = self.getAt(pos-1)
+          return self.popAfter(prev)
+          
       def concat(self, L)
+          ALastNode = self.tail.prev
+          BFirstNode = L.head.next
+        
+          ALastNode.next = BFirstNode
+          BFirstNode.prev = ALastNode
+          self.tail = L.tail
+          L.head = self.head
+          self.nodeCount += L.nodeCount    
      </pre>   
      
