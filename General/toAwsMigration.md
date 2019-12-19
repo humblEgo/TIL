@@ -1,4 +1,4 @@
-### Migration to AWS Case – MUSINSA
+### AWS Migration Case – MUSINSA
 
 : 기존에는 89개에 달하는 Physical Machine을 서버로 활용했으나, 비즈니스 확장 에 대응할 수 없었음. 이를 해결해야하는 상황에서 ‘Money, Time, Human’ 제약 을 고려하여 AWS를 선택하여 아래 전략으로 Migration함.
 
