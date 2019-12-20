@@ -35,13 +35,13 @@
 
 
 ----
-<b id="footnote1">1</b> : 2018년 연말의 최고 트래픽을 2019년 상반기에 갱신할 정도로 비즈니스가 확장되었으며, 그만큼 push 이벤트 등으로 인한 순간 트래픽 이슈와 요구사항의 빈번한 변동이라는 이슈가 대두됨.[<Back](#al1)
+<b id="footnote1">1</b> : 2018년 연말의 최고 트래픽을 2019년 상반기에 갱신할 정도로 비즈니스가 확장되었으며, 그만큼 push 이벤트 등으로 인한 순간 트래픽 이슈와 요구사항의 빈번한 변동이라는 이슈가 대두됨.[Back](#al1)
 
 <b id="footnote2">2</b> : Money: 연중 최대 트래픽에 맞추어 physical server를 증설하면, 최대 트래픽이 없는 동안 유휴자원으로 남아 비용 대비 비효율적임.
 Time: 연중 최대 트래픽이 예상되는 블랙프라이데이 이벤트 전에 migration을 종료해야 했음.
-Human: Time 제약 때문에 새로 직원을 뽑을 수 없었음, 결국 기존 직원들이 서비스를 operating하면서 migration을 해야 했음.[<Back](#al2)
+Human: Time 제약 때문에 새로 직원을 뽑을 수 없었음, 결국 기존 직원들이 서비스를 operating하면서 migration을 해야 했음.[Back](#al2)
 
-<b id="footnote3">3</b> : [Micro Service Architecture](http://guruble.com/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4microservice-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B7%B8%EA%B2%83%EC%9D%B4-%EB%AD%A3%EC%9D%B4-%EC%A4%91%ED%97%8C%EB%94%94/)  [<Back](#al3)
+<b id="footnote3">3</b> : [Micro Service Architecture](http://guruble.com/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4microservice-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EA%B7%B8%EA%B2%83%EC%9D%B4-%EB%AD%A3%EC%9D%B4-%EC%A4%91%ED%97%8C%EB%94%94/)  [Back](#al3)
 
-<b id="footnote4">4</b> : 동시성 가지고 돌아가야 하는 서비스와 그러지 않아도 되는 서비스를 분리하는 것.[<Back](#al4)
+<b id="footnote4">4</b> : 동시성 가지고 돌아가야 하는 서비스와 그러지 않아도 되는 서비스를 분리하는 것.[Back](#al4)
 
