@@ -7,7 +7,8 @@
  - [조건문과 반복문](#조건문과-반복문)
  - [배열](#배열)
  - [객체지향언어](#객체지향언어)
- 
+ - [예외처리](#예외처리)
+ - [java.lang패키지와 유용한 클래스](#java.lang패키지와-유용한-클래스)
  ----
  ### 변수
  
@@ -436,5 +437,143 @@
       - 클래스와 클래스간의 직접적인 관계를 인터페이스를 이용해서 간접적인 관계로 변경하면 한 클래스의 변경이 관련된 다른 클래스에 영향을 미치지 않는 독립적인 프로그래밍이 가능해진다.
  
  
+----
+### 예외처리
+
+ - 에러와 예외
  
+ '에러(Error)'는 프로그램 코드에 의해서 수습될 수 없는 심각한 오류를 뜻하고, '예외(Exception)'는 프로그램 코드에 의해서 수습될 수 있는 다소 미약한 오류를 뜻한다. 자바에서는 에러와 예외 모두 클래스로 정의하였으며, 따라서 둘 모두 Object클래스의 자손들이다. 상속관계에 따라, Exception 클래스는 1) Exception 클래스와 그 자손들 2) RuntimeException클래스와 그 자손들로 나눌 수 있다. 
  
+ - 예외처리하기
+ 
+ 예외처리(exception handling)란, 프로그램 실행 시 발생할 수 있는 예기치 못한 예외의 발생에 대비한 코드를 작성하는 것을 뜻한다. 먼저 'try - catch' 구문으로 처리 가능하며 원리는 다음과 같다.
+ 1. try블럭 안의 코드를 실행하고, 예외가 발생할 경우 발생한 예외에 해당하는 클래스의 인스턴스가 만들어진다.
+ 2. catch블럭의 괄호()내에 선언된 참조변수의 종류와 생성된 예외클래스의 인스턴스를 instanceof 연산자를 이용해서 감사하여 검사결과가 true인 catch블럭을 만날 때까지 순차적으로 진행한다.
+ 3. 검사결과가 true인 catch블럭을 찾게 되면 블럭에 있는 문장들을 모두 수행한 후 에 'try - catch'문을 빠져나가고 예외는 처리된다.
+ 검사결과가 true인 cathc블럭이 없으면 예외는 처리되지 않는다.
+ 
+ 모든 예외 클래스는 Exception클래스의 자손이므로, catch블럭의 괄호()에 Exception클래스 타입의 참조변수를 선언해 놓으면 어떤 종류의 예외가 발생하더라도 이 catch블럭에 의해서 처리된다.
+ 
+ 두번째로 예외를 메서드에 선언하는 방식으로도 예외를 처리 가능하다. 아래처럼 메서드의 선언부에 키워드 throws를 사용해서 메서드 내에서 발생할 수 있는 예외를 명시해서 처리를 강제하는 것이다.
+ ```java
+ void method() throws Exception1, Exception2, ... ExceptionN { // 메서드 내용}
+ ```
+ 사실 예외를 메서드의 throws에 명시하는 것은 예외를 처리하는 것이 아니라, 자신(예외가 발생할 가능성이 있는 메서드)을 호출한 메서드에게 예외를 전달하여 예외처리를 떠맡기는 것이다. **결국 어느 한 곳에서는 반드시 try-catch문으로 예외처리를 해주어야 한다.**
+ 
+ - finally 블럭
+ 
+ finally블럭은 try-cath문과 함께 예외의 발생여부에 상관ㅇ벗이 실행되어야할 코ㅡ를 포함시킬 목적으로 사용된다. 
+ 
+ - 연결된 예외(chained exception)
+ 
+ 한 예외가 다른 예외를 발생시켰다면, 원인 예외(cause exception)로 등록해서 활용할 수 있다. 그럼 여러가지 예외를 상속관계가 아니어도 하나의 큰 부류의 예외로 묶어서 다룰 수 있으며, checked예외를 unchecked예외로 바꿔서 불필요한 예외처리가 필요없도록 한다. Exception클래스의 조상인 Throwable클래스에 정의되어있는 `initCause()`를 사용가능하다.
+ 
+### java.lang패키지와 유용한 클래스
+
+ - Object클래스: 모든 클래스의 조상, 멤버변수는 없고 오직 11개의 메서드만 가지고 있다. 
+   - equals(Object obj): 매개변수를 객체 참조변수로 받아서 비교하여 그 결과를 boolean 값으로 알려주는 역할. 값이 아니라 주소값으로 비교한다. 값을 비교하도록 하고 싶으면 equals메서드를 오버라이딩하여 주소가 아닌 객체에 저장된 내용을 비교하도록 변경하면 된다.
+   - hashCode(): 해싱기법에 사용되는 '해시함수'를 구현한 것.
+   - toString(): 인스턴스에 대한 정보를 문자열로 제공. 보통 인스턴스나 클래스에 대한 정보 또는 인스턴스 변수들의 값을 문자열로 변환하여 반환하도록 오버라이딩되는 것이 보통이다. String클래스의 toString()은 String인스턴스가 갖고 있는 문자열을 반환하도록 오버라이딩 되어 있고, Date클래스의 경우, Date인스턴스가 갖고 있는 날짜와 시간을 문자열로 변환하여 반환하도록 오버라이딩되어 있다. 오버라이딩할 때 Object클래스에 정의된 toString()의 접근 제어자가 public이므로 참고해서 접근제어자 설정하는게 바람직함.
+   - clone(): 자신을 복제해서 새로운 인스턴스를 생성하는 일을 함. 복제할 클래스에 Cloneable인터페이스를 implements해야 쓸 수 있고, clone()을 오버라이딩하는 경우 접근 제어자를 protected에서 public으로 변경해서 상속관계까 없는 다른 클래스에서 clone()을 호출 할 수 있도록 처리한다. 
+     - 얕은 복사: clone()은 값만 복사하므로, 객체가 참조하고 있는 객체까지 복제하지는 않는다. 같은 객체를 공유하므로 복사본을 수정시 참조주소가 가리키고 있는 객체도 함께 변경된다.
+     - 깊은 복사: 원본이 참조하고 있는 객체까지 복제하는 것. 원본과 복사본이 서로 다른 객체를 참조하므로 원본의 변ㄱ영이 복사본에 영향을 미치지 않는다.
+   - getClass(): 자신이 속한 클래스의 Class객체를 반환하는 메서드. Class객체는 클래스의 모든 정보를 담고 있으며, 클래스 당 1개만 존재한다. '클래스 로더'에 의해서 메모리에 클래스파일이 올라갈 때 자동으로 생성된다. 이를 이용하면 동적으로 객체를 생성하고 메서드를 호출 할 수 있음. 쓸거면 '리플렉션 API' 참고하면 됨.
+ 
+ - String클래스: 자바에서는 문자열을 위한 클래스를 따로 제공한다. 중요하니까 파볼 것.
+   - 변경 불가능한(immutable)클래스: String클래스를 까보면 아래와 같은데,
+   ```java
+   public final class String implements java.io.Serializable, Comparable {
+       private char[] value;
+       ...
+       }
+   ```
+   인스턴스 생성 시 생성자의 매개변수로 입력받는 문자열을 인스턴스변수에 문자형 배열로 저장된다. 
+   
+   - 문자열 리터럴: 자바 소스파일에 포함된 문자열 리터럴은 컴파일 시에 클래스 파일에 저장된다. 
+   
+   - 빈 문자열: String에는 char와 달리 빈문자열 생성 가능하다. C언어에서는 문자열의 끝에 null 문자를 항상 붙이지만, 자바에선느 null 문자를 사용하지 않고, 문자열의 길이 정보를 따로 저장한다.
+   
+   -String클래스의 생성자와 메서드: 한번은 훑어야지..!
+     - Stirng(String s): 주어진 문자열을 갖는 Stirng 인스턴스를 생성.
+     - String(char[] value): 주어진 문자열을 갖는 String 인스턴스를 생성.
+     - String(StringBuffer buf): StirngBuffer인스턴스가 갖고 있는 문자열과 같은 내용의 String인스턴스를 생성.
+     - char charAt(int index): 지정된 위치에 있는 문자를 알려줌.
+     - int compareTo(String str): 문자열과 사전순서로 비교한다. 같으면 0을, 사전순으로 이전이면 음수를, 이후면 양수를 반환한다.
+     - String concat(String str): 문자열을 뒤에 덧붙인다.
+     - boolean contains(CharSequence s): 지정된 문자열이 포함되었는지 검사한다.
+     - boolean endsWith(String suffix): 지정된 문자열로 끝나는지 검사한다.
+     - boolean equals(Object obj): 매개변수로 받은 문자열과 String 인스턴스의 문자열을 비교한다. '내용'을 비교하는 것!
+     - boolean equalsIgnoreCase(String str): 문자열과 String인스턴스의 문자열을 대소문자 구분없이 비교한다.
+     - int indexOf(int ch): 주어진 문자가 문자열에 존재하는지 확인하여 위치를 알려준다. 못 찾으면 '-1'을 반환한다.
+     - int indexOf(int ch, itn pos): 주어진 문자가 문자열에 존재하는지 지정된 위치부터 확인하여 위치를 알려준다. 못 찾으면 -1을 반환한다.
+     - int indexOf(String str): 주어진 문자열이 존재하는지 확인하여 그 위치를 아렬준다. 없으면 -1을 반환한다.
+     - String intern(): 문자열을 상수풀에 등록한다. 이미 상수풀에 같은 내용의 문자열이 있을 경우 그 문자열의 주소값을 반환한다.
+     - int lastIndexOf(int ch): 지정된 문자 또는 문자코드를 문자열의 오른쪽 끝에서부터 찾아서 위치를 알려준다. 못 찾으면 -1 반환.
+     - int lastIndexOf(String str): 지정된 문자열을 인스턴스의 문자열 끝에서부터 찾아서 위치를 알려준다. 못 찾으면 -1 반환.
+     - int length(): 문자열의 길이를 알려준다.
+     - String replace(char old, char nw): 문자열 중의 문자를 새로운 문자로 바꾼 문자열을 반환한다.
+     - String replace(CharSequence old, CharSequence nw): 문자열 중에서 문자열을 새로운 문자열로 모두 바꾼 문자열을 반환한다.
+     - String replaceAll(String regex, Strign replacement): 문자열 중에서 지정된 문자열과 일치하는 것을 새로운 문자열로 모두 변경한다.
+     - String replaceFirst(String regex, String replacement): 문자열 중에서 지정된 문자열과 일치 하는 것 중, 첫 번쨰 것만 새로운 문자열로 변경한다.
+     - String[] split(String regex): 문자열을 지정된 분리자로 나누어 문자열 배열에 담아 반환한다.
+     - String[] split(String regex, int limit): 문자열을 지정된 분리자로 나누어 문자열배열에 담아 반환한다. 단, 문자열 전체를 지정된 수로 자른다.
+     - boolean startsWith(String prefix): 주어진 문자열로 시작하는지 검사한다.
+     - String substring(int begin, int end): 주어진 시작위치부터 끝 위치 범위에 포함된 문자열을 얻는다. 이 때, 시작위치의 문자는 범위에 포함되지만(<=), 끝 위치의 문자는 포함되지 않는다.(<)
+     - String toLowerCase(): String인스턴스에 저장되어있는 모든 문자열을 소문자로 변환하여 반환한다.
+     - String toUpperCase(): String인스턴스에 저장되어있는 모든 문자열을 대문자로 변환하여 반환한다.
+     - String toString(): String인스턴스에 저장되어 있는 문자열을 반환한다.
+     - String trim(): 문자열의 왼쪽 끝과 오른쪽 끝에 있는 공백을 없앤 결과를 반환한다. 이 때 문자열 중간에 있는 공백은 제거되지 않는다.
+     - static String valueOf(데이터형 변수): 지정된 값을 문자열로 변환하여 반환한다. 참조변수의 경우, toString()을 호출한 결과를 반환한다.
+     
+ - join()과 StringJoiner
+ 
+ join()은 여러 문자열 사이에 구분자를 넣어서 결합한다. 
+ 
+ - 문자 인코딩 변환
+ 
+ getBytes(Sring charsetName)을 이용하면 문자열의 문자 인코딩을 다른 인코딩으로 변경할 수 있다.
+ 
+ - String.format(): printf()하고 사용법이 완전히 똑같음.
+ 
+ - String을 기본형 값으로 변환
+ 
+ valueOf()를 쓰거나 parseInt()를 쓰면 된다. valueOf(String s)는 메서드 내부에서 그저 parseInt(String s)를 호출할 뿐이므로 두 메서드는 반환 타입만 다르지 같은 메서드이다.
+ ```java
+ //예시
+ int i = Integer.parseInt("100"); 
+ int i2 = Integer.valueOf("100"); //원래 valueOf()의 반환 타입은 Integer인데, 오토박싱으로 인해 int로 자동형변환된다.
+ ```
+ 이런 메서드를 쓸 때 문자열에 공백 또는 문자가 포함되어 있는 경우 변환시 예외가 발생할 수 있으므로 trim()을 습관적으로 사용하여 문자열 양끝의 공백을 제거해주자!!
+ 
+ - StringBuffer클래스
+ 
+ String클래스는 인스턴스를 생성할 때 지정된 문자열을 변경할 수 없지만 StringBuffer클래스는 변경이 가능하다. 내부적으로 문자열 편집을 위한 버퍼가 있고, 인스턴스 생성시 크기 지정이 가능하다. 크기 지정안하면 16개의 문자를 저장할 수 있는 크기의 버퍼를 생성한다. 뜯어보면 아래같은 코드가 들어있다.
+ ```java
+ // 새로운 길이(newCapacity)의 배열을 생성한다. newCapacity는 정수값이다.
+ char newValue[] = new char[newCapacity];
+ 
+ //배열 value의 내용을 배열 newValue에 복사한다.
+ System.arraycopy(value, 0, newValue, 0); // count는 문자열의 길이
+ value = newValue; // 새로 생성된 배열의 주소를 참조변수 value에 저장.
+ ```
+ 
+   - append()
+   
+   append()는 반환타입이 StringBuffer여서 **자신의 주소를 반환**한다. 따라서 아래처럼 연속해서 append()를 호출할 수도 있다.
+   ```java
+   StringBuffer sb = new StringBuffer("abc");
+   sb.append("123").append("zz");
+   ```
+   
+   - StringBuffer의 비교
+   
+   StringBuffer에서는 toString()과 다르게 equals메서드가 오버라이딩 되어있지 않아서 등가비교연산자(==)와 동일하게 작동한다. 따라서 값만 비교하려면 toString()을 호출해서 String 인스턴스를 얻은 다음, 여기에 equals메서드를 사용해서 비교해야한다.
+   ```java
+   //예시
+   String s = sb.toString();
+   String s2 = sb2.toString();
+   
+   System.out.println(s.equals(s2)); //true
+   ```
+   
+ - StringBuilder클래스
