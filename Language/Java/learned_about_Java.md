@@ -577,3 +577,49 @@
    ```
    
  - StringBuilder클래스
+ 
+ StringBuffer는 멀티쓰레드에 안전(thread safe)하도록 동기화되어있다. 때문에 멀티쓰레드로 작성된 프로그램이 아닌 경우, STringBuffer의 동기화는 불필요하게 성능만 떨어뜨리게 된다. 그래서 StringBuffer에서 쓰레드의 동기화만 뺀 것이 StringBuilder가 추가되었다!
+ 
+ - Math클래스
+ 
+ Math클래스의 생성자는 접근 제어자가 private이기 떄문에 다른 클래스에서 Math인스턴스를 생성할 수 없도록 되어있다. 클래스 내에 인스턴스변수가 하나도 없어서 인스턴스를 생성할 필요가 없기 때문. Math클래스의 메서드는 모두 static이다.
+ 
+   - static long round(double이나 float a): 소수점 첫 째자리에서 반올림하고 long값 반환함. 매개변수 값이 음수일 때 rint()랑 값 다르니까 주의.
+   - static double rint(double a): 소수점 첫 째자리에서 반올림하고 double값 반환함. 매개변수 값이 음수일 때 round()랑 값 다르니까 주의.
+   - sqrt(): 제곱근을 계산해줌.
+   - pow(): n제곱을 계산해줌.
+   - 삼각함수는 매개변수의 단위가 라디안이다. 라디안 값을 넣어주거나 아니면 toRadians(double angdeg)를 이용하자.
+   - atan2메서드는 직각 삼각형에서 두 변의 길이 a,b를 알면 끼인각을 구해줌. 결과값은 라디안임. 도(degree)로 변환하려면 '180/PI'를 곱하거나 toDegree(double angrad)를 이용하면 된다.
+   - static 데이터타입 abs(데이터타입 변수명): 절대값 반환.
+   - static double ceil(double a): 올림
+   - static double floor(double a): 내림
+   - static 데이터타입 max(데이터타입 변수명1,데이터타입 변수명2): 값 비교하여 큰 쪽 반환.
+   - static 데이터타입 min(데이터타입 변수명1,데이터타입 변수명2): 값 비교하여 작은 쪽 반환.
+   - static double rint(double a): 주어진 double값과 가장 가까운 정수값을 double형으로 반환
+   - static double random(): 0.0~1.0범위의 임의의 double값을 반환한다.(1.0은 범위에 포함되지 않는다.)
+   
+ - StricMath클래스
+ 
+ Math클래스는 최대한의 성능을 얻기 위해 JVM이 설치된 OS의 메서드를 호출해서 사용한다. 즉, OS에 의존적인 계산을 하고 있고 OS에 따라 계산 결과값이 달라질 수 있다. 이러한 차이를 없애기 위해 성능은 다소 포기하는 대신, 어떤 OS에서 실행되어도 항상 같은 결과를 얻도록 Math클래스를 새로 작성한 것이 StrictMath클래스이다.
+ 
+ - wrapper클래스
+ 
+ 기본형 값을 객체로 다루기 위한 클래스이다. 래퍼 클래스의 생성자는 매개변수로 문자열이나 각 자료형의 값들을 인자로 받는데, 생성자의 매개변수로 문자열을 제공할 때, 각 자료형에 알맞은 문자열을 사용해야 예외가 발생하지 않는다. 래퍼 클래스는 모두 equals()가 오버라이딩 되어있어 주소값이 아닌 값을 비교할 수 있다. 참고로 컴파일러가 **오토박싱&언박싱** 기능을 제공해서 기본형과 참조형 간에도 계산이 가능하다.
+ 
+ - 정규식(Regular Expression) - java.util.regex패키지
+ 
+ 정규식이란 테스트 데이터 중에서 원하는 조건(패턴, pattern)과 일치하는 문자열ㅇㄹ 찾아 내기 위해 사용하는 것으로 미리 정의된 기호와 문자를 이용해서 작성한 문자열을 말한다. 원하는 데이터 뽑아내거나 형식에 맞는지 체크할 때 활용! 과정을 요약하면 아래와 같다.
+   1. 정규식을 매개변수로 Pattern 클래스의 static 메서드인 Pattern complie(String regex)을 호출하여 Pattern인스턴스를 얻는다.
+   `예시: Pattern p = Pattern.compile("c[a-z]*");`
+   2. 정규식으로 비교할 대상을 매개변수로 Pattern클래스의 Matcher matcher(CharSequence input)를 호출해서 Matcher인스턴스를 얻는다.
+   `예시: Matcher m = p.matcher(data[i]);`
+   3. Matcher인스턴스에 boolean matches()를 호출해서 정규식에 부합하는지 확인한다.
+   `예시: if(m.matches())`
+   
+ - java.util.StringTokenizer클래스
+ 
+ StringTokenizer는 긴 문자열을 지정된 구분자(delimiter)를 기준으로 토근(token)이라는 여러 개의 문자열로 잘라내는 데 사용된다. 구분자로 단 하나의 문자 밖에 사용하지 못하기 떄문에 보다 복잡한 형태의 구분자로 문자열을 나누어야 할 때는 어절 수 없이 정규식을 사용하는 메서드를 사용해야한다.
+ 
+ split()는 빈 문자열도 토큰으로 인식하는 반면 StringTokenizer는 빈 문자열을 토큰으로 인식하지 않는다. 또한 split()는 데이터를 토큰으로 잘라낸 결과를 배열에 담아서 반환하기 때문에 성능이 비교적 떨어진다.
+ 
+ 
