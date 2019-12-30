@@ -15,5 +15,4 @@
  
  ## Index
  ----
- - HTML, CSS
- - DataStructure
+추후 작성할 것
