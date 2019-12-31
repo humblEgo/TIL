@@ -106,4 +106,112 @@
           L.head = self.head
           self.nodeCount += L.nodeCount    
      </pre>   
-     
+
+
+----
+### C언어로 구현한 경우
+
+
+```C
+
+#include <stdio.h>
+#include <stdlib.h> //malloc과 free 함수를 사용하기 위해 include
+
+typedef struct listNode {
+	int Data;
+	struct listNode* Next;  //다음 노드를 연결하는 포인터를 작성
+	struct listNode* Prev;  //이전 노드를 연결하는 포인터를 작성
+} Node;
+
+Node* createNode(int data) { // 노드 생성 기능 구현(데이터 주면 노드 만들어서 만든 노드 포인터를 리턴함)
+
+	Node* newNode = (Node*)malloc(sizeof(Node)); // 노드 사이즈만큼 메모리 할당
+
+	// varaibles initalization
+	newNode->Data = data;
+	newNode->Next = NULL;
+	newNode->Prev = NULL;
+
+	return newNode;
+}
+
+void deleteNode(Node* Node) { // 노드 삭제
+	free(Node);
+}
+
+Node* getNodeAt(Node* head, int index) { //index에 있는 node를 반환
+	Node* traverse = head;
+	int count = 0;
+
+	while (traverse != NULL) {
+		if (count++ == index){
+			return traverse;
+			}
+		traverse = traverse->Next;
+	}
+	return NULL;
+}
+
+int countNode(Node* head){ //시작점 받으면 리스트에 노드 몇 개인지 반환
+	Node* traverse = head;
+	int count = 0;
+	
+	while ( traverse != NULL ) {
+		traverse = traverse->Next;
+		count++;
+	}
+	return count;
+}
+
+void appendNode(Node** head, Node* newNode) { //새 노드를 리스트 제일 마지막에 추가
+    
+	if ((*head) == NULL) {                        // no list exists
+		*head = newNode;
+	}	
+	else {                                        // list exists
+		Node* traverse = *head;
+
+		while (traverse->Next != NULL) {
+			traverse = traverse->Next;
+		}
+
+		traverse->Next = newNode;
+		newNode->Prev = traverse;
+	}	
+}
+
+void insertAfter(Node* Current, Node* newNode) {
+	//Current가 head라면,
+	if (Current->Prev == NULL && Current->Next == NULL) {
+		Current->Next = newNode;
+		newNode->Prev = Current;
+	}
+	//Currnet가 not head라면,
+	if (Current->Next == NULL) { //Current가 tail일 경우
+		Current->Next = newNode;
+		newNode->Prev = Current;
+	}
+	else { //Current가 tail이 아닐 경우
+		Current->Next->Prev = newNode;
+		newNode->Next = Current->Next;
+		Current->Next = newNode;
+		newNode->Prev = Current;
+	}
+}
+
+void removeNode(Node** head, Node* remove){
+		//remove node만 하나 있을 때.
+		if (remove == *head) {
+			*head = remove->Next;
+		}
+		// remove node의 next가 NULL이 아닐 때
+		if(remove->Next != NULL){
+			remove->Next->Prev = remove->Prev;			
+		}
+		// remove node의 prve가 NULL이 아닐 떄,
+		if (remove->Prev != NULL) {
+			remove->Prev->Next = remove->Next;
+		}
+
+		deleteNode(remove);
+}
