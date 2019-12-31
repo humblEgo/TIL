@@ -29,7 +29,7 @@
              result.append(curr.data)
          return result
          
-     def reverse(self):     #이중연결리스트를 tail에서 head 방향으로 순회하며 리스트로 값을 반환
+     def reverse(self):      #이중연결리스트를 tail에서 head 방향으로 순회하며 리스트로 값을 반환
          result = []
          curr = self.tail
          while curr.prev.prev:
