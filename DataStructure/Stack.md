@@ -123,7 +123,8 @@ Item peek(Stack s){
 
 
 
-'''C
+```C
+
 typedef struct sNode {
 	char* data;
 	struct sNode* next;
