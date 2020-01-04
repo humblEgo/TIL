@@ -40,7 +40,7 @@
     
     - 넓이 우선 순회(Breadth Frist Traversal): level이 낮은 노드를 우선으로 방문, 같은 level의 노드들 사이에서는, 부모 노드의 방문 순서에 따라 방문하고, 왼쪽 자식 노드를 오른쪽 자식보다 먼저 방문.
  
- <pre>
+ ```Python
  class ArrayQueue:
 
     def __init__(self):
@@ -133,5 +133,5 @@
          else:
              return []
          return traversal
-</pre>
+```
 
