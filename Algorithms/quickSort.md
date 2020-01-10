@@ -28,29 +28,25 @@ C로는 아래와 같이 구현가능하다.
 
 int partition(int Array[], int p, int r) {  
     
-    int i = p-1;    //pivot보다 작은 값들 중 마지막 값
-    int j = p;    // 지금 검사하려는 값
+    int pivotLeft = p-1;    //pivot보다 작은 값들 중 마지막 값
+    int valueCheck = p;    // 지금 검사하려는 값
     int pivotData = Array[r];        
 
-    int temp = 0;
+    int temp;
 
-    for (i = 0; i < r; i++) {
-        if (Array[i] >= pivotData) {
-            j += 1;
-        }
-        else {
-            i += 1;            
-            temp = Array[i];
-            Array[i] = Array[j];
-            Array[j] = temp;
-            j += 1;
+    for (int valueCheck = p; valueCheck < r; valueCheck++) {
+        if (Array[valueCheck] < pivotData) {
+            pivotLeft += 1;            
+            temp = Array[pivotLeft];
+            Array[pivotLeft] = Array[valueCheck];
+            Array[valueCheck] = temp;
         }
     }    
-    temp = Array[i + 1];
-    Array[i + 1] = Array[j];
-    Array[j] = temp;
+    temp = Array[pivotLeft + 1];
+    Array[pivotLeft + 1] = Array[r];
+    Array[r] = temp;
 
-    return i+1;
+    return pivotLeft+1;
 }
 
 void quickSort(int Array[], int p, int r) { // A[p...r]을 정렬한다.
