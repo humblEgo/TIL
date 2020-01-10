@@ -41,3 +41,28 @@ BUILD-MAX-HEAP(a){
 ```
 
 
+### 우선순위 큐?
+
+insert(x)랑 extact_max(): 최대값을 삭제하고 반환. 하는 걸 가짐.
+
+```C
+MAX-HEAP-INSERT(A,key){
+    heap_size = heap_size +1;
+    A[heap_size] = key;
+    i = heap_size;
+    while (i > 1 and A[PARENT(i)] < A[i]) {
+        exchange A[i] and A[PARENT(i)];
+        i = PARENT(i);
+    }
+}
+EXTRACT_MAX(){
+    if heap-size[A] <1
+        then error "heap underflow"
+    max = A[1]
+    A[1] = A[heap-size[A]]    
+    max-heapify(A, 1)    
+    heap_size = heap_size - 1;
+}
+
+```
+
