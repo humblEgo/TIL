@@ -19,3 +19,4 @@
   - Algorithms
   - DataStructures
   - Servlet
+  - learned from 42seoul
