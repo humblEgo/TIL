@@ -12,5 +12,5 @@ Working Directory / Staging Area / Local Repository / Remote Repository
 
 수정한 내역을 원격지 저장소에 반영하려면, `git add`(Working Directory --> Staging Area), `git commit`(Staging Area --> Local Repository), `git push`(Local Repository-->Remote Repository)의 과정을 거친다.
 
-원격지 저장소로부터 수정된 내역을 받을 때에는 `git fetch`(Remote Repository->Local Repository)를 수행하고, 컴퓨터에 있는 소스코드를 이와 맞추려면 `git merge`(Local Repository-->Working Directory)를 수행한다. `git pull`은 git fetch와 git merge를 한 번에 사용하는 명령어이다.
+원격지 저장소로부터 수정된 내역을 받을 때에는 `git fetch`(Remote Repository->Local Repository)를 수행하고, 컴퓨터에 있는 소스코드를 이와 맞추려면 `git merge`(Local Repository-->Working Directory)를 수행한다. `git pull`은 git fetch와 git merge를 한 번에 사용하는 명령어이다. 
 
