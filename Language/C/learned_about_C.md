@@ -26,6 +26,7 @@
    - size_t는 부호 없는 정수형(unsigned integer)으로 sizeof, alignof, offsetof의 return 값이다. *unsigned int 타입이 아니다!*
    - 이론상 해당 시스템에서 어떤 값 객체가 차지할 수 있는 이론적인 최대 크기를 표현하는 자료형이다. 즉, 32bit, 64bit 등 시스템에 따라 각각 '부호없는 32bit 정수' 크기를 가지거나 '부호없는 64bit 정수' 크기를 가지는 식으로 크기가 변화한다. *이 점이 unsigned int와 다르다, unsigned int는 64bit OS라고해서 꼭 64bit 정수는 아닐 수 있다.*
    - 1바이트로 만들 수 있는 최대 크기의 array라든지, 하나의 값이 가질 수 있는 최대의 크기를 범위로 하는 값을 다룰 때 필요하다.
+   - c에서는 stddef.h / stdio.h / stdlib.h / string.h / time.h / uchar.h / wcahr.h에 정의되어있다.
 
 
 #### 상수의 종류
