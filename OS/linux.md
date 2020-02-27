@@ -114,7 +114,8 @@ shell: 명령어 해석기! user와 kunnel을 이어주는 역할을 한다.
  좌 h
  우 l
  
- 
+ ----
+ [ubuntu에서 valgrind로 memory leak 검사하기](https://rosagigantea.tistory.com/488)
  
  
  
