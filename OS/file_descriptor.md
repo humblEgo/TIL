@@ -14,8 +14,10 @@ POSIX 표준에서는 STDIN_FILENO, STDOUT_FILENO, STDERR_FILENO로 참조되며
 파일 디스크립터는 0 ~ OPEN_MAX 까지의 값을 가질 수 있으며, OPEN_MAX 값은 플랫폼에 따라 다르다.
 
 커널 구조체 중에 struct files_struct에는 struct file fd_array라는 배열이 있는데, 이 구조체 배열의 index가 open을 통해 얻는 파일 디스크립터(fd)이다.
+
 fd로 파일을 제어할 때는, fd번째 원소인 fd_array[fd]는 **'Offset, 동작제어 flag, 접근 모드, i/o 관련 설정, 파일의 inode 객체를 가리키는 레퍼런스'**로 이루어진 `dentry` 구조체 배열인 File table의 원소를 가르키고, 
 이 구조체가 가르키는 inode에 접근하는 과정을 거친다. 이 때 dentry는 directory entry를 의미하며 리눅스에서 디렉토리에 접근을 빠르게 하기 위한 구조체로 사용한다고 한다, 
+
 한편 inode는 파일 종류(일반파일, 소켓, fifo)와 권한, lock 목록 포인터, 여러 파일 오퍼레이션과 다양한 파일 속성(크기, 파일스탬프 등)을 가지고 있다.
 
 즉, open 함수로 파일을 호출하면, 해당 파일에 대한 dentry를 생성하고, inode를 생성(또는 읽음) 후에 해당 프로세스의 open 파일 관리 구조체인 files_struct의 fd_array 의 비어있는 위치에 생성한 dentry를 포인팅하고 그 index를 반환하게 되는 것이다.
