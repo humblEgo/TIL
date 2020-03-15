@@ -1,3 +1,9 @@
+
+### Bash Shell command
+
+[이 링크](http://pyrasis.com/book/DockerForTheReallyImpatient/Chapter04) 참고
+
+
 ### 리눅스 도움말 보는 법
 
 
@@ -8,7 +14,7 @@
  - ~   : Home 디렉토리
 
 명령어 'echo $PATH'를 입력했을 때 안에 포함되어 있는 것은 바로 실행할 수 있다. 
-아니라면 경로를 일일이 입려해줘야 실행할 수 있다.
+아니라면 경로를 일일이 입력해줘야 실행할 수 있다.
 
 
 **리눅스 도움말 형식**
