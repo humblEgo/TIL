@@ -15,7 +15,3 @@
  
  ## Index
  ----
-추후 작성할 것
-  - Algorithms
-  - DataStructures
-  - Servlet
