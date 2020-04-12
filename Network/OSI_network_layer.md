@@ -31,7 +31,7 @@ IP주소는 32비트로 구분하기 쉽도록 10진수로 표시한다.
 
 IP주소는 '어떤 네트워크 인지'를 나타내는 **네트워크 ID**와 '해당 네트워크의 어느 컴퓨터'인지를 나타내는 **호스트 ID**로 이루어져 있다.
 
-참고) [What is the difference between public and private IP address?](What is the difference between public and private IP address?)
+참고) [What is the difference between public and private IP address?](https://www.iplocation.net/public-vs-private-ip-address)
 
 ### IP주소 클래스
 
