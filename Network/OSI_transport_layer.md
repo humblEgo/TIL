@@ -5,6 +5,8 @@
 - 연결형 통신 : 상대편과 확인해 가면서 통신하는 방식으로, **신뢰성/정확성**이 상대적으로 높다. 연결형 통신 프로토콜로는 **TCP(Transmission Control Protocol, 전송 제어 프로토콜)**가 쓰인다.
 - 비연결형 통신 : 상대편을 확인하지 않고 일방적으로 데이터를 전송하는 방식으로, **효율성**이 높다. 주로 속도가 중요한 동영상 전송에 쓰인다. 비연결형 통신 프로토콜로는 **UDP(User Datagram Protocol, 사용자 데이터그램 프로토콜)**이 쓰인다.
 
+참고) [Why does DHCP use UDP and not TCP?](https://networkengineering.stackexchange.com/questions/64401/why-does-dhcp-use-udp-and-not-tcp)
+
 ### TCP(Trnasmission Control-Protocol)
 
 전송 계층에서 TCP로 전송할 때는 데이터에 **TCP 헤더**를 붙여서 **세그먼트(segment)**로 만든 뒤 이를 전송한다. TCP 헤더에는 아래 정보가 포함된다.
