@@ -67,8 +67,13 @@
 - 미리 빈을 생성해 놓고, 빈이 필요할 떄 즉시 사용할 수 있도록 보장해준다. _(컨텍스트 초기화 시점에 모든 싱글톤 빈을 미리 로드한 후, 애플리케이션 기동 후에는 빈을 지연없이 얻을 수 있다.)_
 
 [참고링크1](https://effectiveprogramming.tistory.com/entry/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%EC%9D%98-%EC%98%AC%EB%B0%94%EB%A5%B8-%EC%9D%B4%ED%95%B4-%EC%B1%85%EC%9E%84Responsibility)
+
 [참고링크2](https://medium.com/@jang.wangsu/di-dependency-injection-%EC%9D%B4%EB%9E%80-1b12fdefec4f)
+
 [참고링크3](https://engkimbs.tistory.com/602?category=767795)
+
 [참고링크4](https://vandbt.tistory.com/42)
+
 [참고링크5](https://medium.com/@jang.wangsu/di-inversion-of-control-container-%EB%9E%80-12ecd70ac7ea)
+
 [참고링크6](https://limmmee.tistory.com/13)
