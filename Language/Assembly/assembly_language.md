@@ -48,9 +48,19 @@ B84AEBF1 5BC3
 
 #### 레지스터(Register)
 
+레지스터는 CPU 바로 안에 있는 고속 저장 장소이며 일반 메모리보다 훨씬 빠른 속도로 접근할 수 있다. 프로그램이 실행되면 실행 파일이 메모리에 상주하면서 동작에 필요한 일부 데이터들이 CPU로 전달되게 되는데, 이 때 그 데이터들이 저장되는 곳이 레지스터이다.
+
+기본적인 프로그램 실행 레지스터는 8개의 범용 레지스터와 6개의 세그먼트 레지스터, 프로세서 상태 플래그 레지스터와 명령어 포인터가 있다.
+
 - 참고
   - [어셈블리어-위키피디아](<https://ko.wikipedia.org/wiki/%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC%EC%96%B4#:~:text=%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC%EC%96%B4(%EC%98%81%EC%96%B4%3A%20assembly%20language),%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%98%20%EC%A0%80%EA%B8%89%20%EC%96%B8%EC%96%B4%EC%9D%B4%EB%8B%A4.>)
   - [저급 프로그래밍 언어-위키피디아](https://ko.wikipedia.org/wiki/%EC%A0%80%EA%B8%89_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D_%EC%96%B8%EC%96%B4)
   - [mnemonic이란 by henry kang](https://medium.com/hexlant/mnemonic-%EC%9D%B4%EB%9E%80-7fb48106bd77))
   - [Intel과 AT&T의 차이점](https://hardner.tistory.com/22)
   - [리버싱과 시스템 해킹을 공부하려면 꼭 알아야하는 어셈블리어의 기초-어셈블리어](https://www.youtube.com/watch?v=yf7yFJHTif8)
+  - [태초의 프로그래밍 언어 어셈블리](https://github.com/gurugio/book_assembly_8086_ko/blob/master/README.md)
+  - [레지스터의 종류와 특징](https://beomnaegol.tistory.com/entry/Assembly-%EB%A0%88%EC%A7%80%EC%8A%A4%ED%84%B0%EC%9D%98-%EC%A2%85%EB%A5%98%EC%99%80-%ED%8A%B9%EC%A7%95)
+  - [어셈블리어 튜토리얼](https://note.heyo.me/asm-tutorial-0/)
+  - [Introduction to x64 Assembly](https://software.intel.com/content/www/us/en/develop/articles/introduction-to-x64-assembly.html)
+  - [NASM tutorial](https://cs.lmu.edu/~ray/notes/nasmtutorial/)
+  - [Assembly on the Mas](https://stackoverrun.com/ko/q/4687127)
