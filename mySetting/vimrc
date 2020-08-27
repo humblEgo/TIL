@@ -1,0 +1,69 @@
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+	Plugin 'VundleVim/Vundle.vim'
+	Plugin 'scrooloose/nerdtree'
+	Plugin 'pbondoer/vim-42header'
+"	Plugin 'tomasr/molokai'
+	Plugin 'morhetz/gruvbox'
+	" Ctags
+	Plugin 'xolox/vim-easytags'
+	Plugin 'xolox/vim-misc'
+	" Airline
+	Plugin 'bling/vim-airline'
+call vundle#end()
+
+let g:hdr42user = 'iwoo'
+let g:hdr42mail = 'iwoo@student.42seoul.kr'
+
+" Ctags
+set tags=./tags
+nnoremap <C-f> <C-]>
+nnoremap <C-d> <C-t>
+nnoremap <C-g> :!ctags -R<CR><CR>
+" ========
+
+set tabstop=4
+set shiftwidth=4
+set noexpandtab
+
+set autoindent
+set cindent
+
+nnoremap <Tab> :bn!<CR>
+
+set background=dark
+let g:gruvbox_material_background = 'soft'
+set t_Co=256
+colorscheme gruvbox 
+" colorscheme molokai
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+set nu
+
+if has ("syntax")
+   syntax on
+endif
+
+map <F5> :NERDTreeToggle<cr>
+
+set statusline=\ %<%l:%v\ [%P]%=%a\ %h%m%r\ %F\
+:hi CursorColumn cterm=NONE ctermbg=DarkGray ctermfg=white guibg=yellow guifg=white
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+
+
+augroup END
+nnoremap	<S-Up> :m-2<CR>
+nnoremap	<S-Down> :m+1<CR>
+
+map nh :noh<CR>
+
+map <C-c> <ESC>:w<CR>
+:imap <C-c> <ESC>:w<CR>
+map <C-x> <ESC>:wq<CR>
+:imap <C-x> <ESC>:wq<CR>
