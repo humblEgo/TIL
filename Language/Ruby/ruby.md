@@ -49,7 +49,7 @@
 
 > 책은 ruby 2.0 version 을 기준으로 기술되어있지만 저는 레일즈 6.x.x. 버전을 써야합니다. 그래서 2.7.1 버전까지의 변경점을 추가로 확인했습니다.
 
-[+) ruby 2.0~2.7.1 release note]()
+[+) ruby 2.0~2.7.1 release note](https://github.com/humblEgo/TIL/blob/master/Language/Ruby/ruby.md#ruby-20271-release-note)
 
 # 1장 루비 개요
 
