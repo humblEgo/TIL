@@ -1,21 +1,23 @@
-# why Ruby?
+> 레일즈 구현시 '필요한 기능을 떠올리고 찾아쓸 수 있는 상태가 되는 것'을 목표로 루비 개념을 훑습니다.
 
-개인적으로 '갈증'을 느낀 다음 학습을 시작하는 것을 선호합니다. 갈증을 해소하기 위한 학습은 즐겁고, 효율적이며, '필요한 만큼' 공부하기 좋기 때문입니다.
 
-마침 아래 두 요인 덕에 루비에 대한 갈증이 최고조네요.
 
-1. 42seoul 의 마지막 공통써클 프로젝트인 trancendence.. 이 프로젝트는 루비온레일즈로 게임서버를 만드는 프로젝트입니다. 루비 공부는 필수입니다.
+# Why Ruby?
+
+개인적으로 '갈증'을 느낀 다음 학습을 시작하는 것을 선호합니다. 갈증을 해소하기 위한 학습은 즐겁고, 효율적으로 필요한 만큼 공부하기 좋기 때문입니다.
+
+마침 아래 두 요인 덕에 루비에 대한 갈증이 최고조네요ㅎㅎ 굳이 다른 언어를 놔두고 루비를 학습하는 이유!
+
+1. 42seoul 의 마지막 공통써클 프로젝트인 `ft_trancendence`. 이 프로젝트는 루비온레일즈로 게임서버를 만드는 프로젝트입니다. 루비 공부가 필수입니다.
 
 2. 스타트업들이 초기 생산성을 위해 루비온레일즈를 아직도 많이들 채택한다는 점에서 관심이 갔습니다.
-   (국내에서는 이런 경향이 적어서 아쉽지만, 제가 애용하고 애정하는 당근마켓도 초기에 루비온레일즈로 만들었다고 합니다ㅎㅎ 요즘은 타입스크립트+노드로 넘어갔다고 하긴하더군요.)
+   국내에서는 이런 경향이 적어서 아쉽지만, 제가 애용하는 당근마켓도 초기에는 루비온레일즈로 만들었다고 합니다. CTO님 피셜에 의하면, 자신은 파이썬 장고파였는데 다른 팀원의 적극적인 어필로 '생산성의 루비온레일즈'를 택했고, 실제로 생산성 덕을 봤다고 하시더군요. 저도 이것저것 빠르게 만들어보고 싶다보니 기대됩니다.
 
 
 
-# 루비 개요
+# 퍼펙트 루비 책 요약 / 2.0~2.7.1 release note
 
-> 퍼펙트 루비 책을 빠르게 훑으며 메모합니다. 
->
-> 싹 훑고 Ruby on rails 6.x.x version을 다뤄야하므로, ruby 2.7.1 verison으로 업데이트할 예정입니다.
+> 개인학습차 책 내용을 메모했습니다. 굳이 정리 안해도 후에 찾아보면 무방할 챕터, 내용은 생략했습니다.
 
 [1장. 루비 개요]()
 
@@ -35,19 +37,25 @@
 
 [9. Method 클래스]()
 
-[10. 루비의 리플렉션 프로그래밍]()
+10. 루비의 리플렉션 프로그래밍
 
-[11. 라이브러리]()
+11. 라이브러리
 
-[12. 내장 툴]()
+12. 내장 툴
 
-[13. gem 패키지 작성법]()
+13. gem 패키지 작성법
 
-[14. 자주 사용되는 외부 툴]()
+14. 자주 사용되는 외부 툴
 
-[15. 커맨드라인 애플리케이션 개발]()
+15. 커맨드라인 애플리케이션 개발
 
-[16. 웹 애플리케이션 개발]()
+16. 웹 애플리케이션 개발
+
+
+
+> 책은 ruby 2.0 version 을 기준으로 기술되어있지만 저는 레일즈 6.x.x. 버전을 써야합니다. 그래서 2.7.1 버전까지의 변경점을 추가로 확인했습니다.
+
+[+) ruby 2.0~2.7.1 release note]()
 
 
 
@@ -1688,9 +1696,598 @@ o.tap {|v| puts v}
 
 # 5장 주요 내장 클래스/모듈
 
+루비 자체에 포함되어있는 내장 클래스/모듈은 require할 필요 없이 바로 사용할 수 있다.
+
+주요 내장 클래스/모듈을 간단 정리해보자.
+
+### Numeric
+
+- 술어 메소드: 자신이 어떤 값을 가지고 있는지 판별할 수 있다.
+
+  ```ruby
+  0.zero? 		#=> true
+  3.zero? 		#=> false
+  0.nonzero? 	#=> nil
+  3.nonzero? 	#=> 3
+  
+  356.integer?	#=> true
+  3.real?				#=> true
+  Complex(1, 2).real?		#=> false
+  
+  1.odd?			#=> true
+  2.even?			#=> true
+  2.next	#=>3
+  2.succ	#=>3
+  2.pred	#=>1
+  ```
+
+- `<=>`: 우주선 연산자 또는 스페이스십 연산자라고도 불리는데 주로 정렬 처리에 이용된다. 왼쪽 값이 오른쪽보다 작으면 음수, 같으면 0, 크면 양수를 반환한다.
+
+  ```ruby
+  1 <=> 2	#=> -1
+  1 <=> 1	#=> 0
+  1 <=> 0 #=> 1
+  ```
+
+  
+
+- `Enumerable#sort` : 블록으로 정렬 방법을 변경할 수 있다. 블록은 우주선 연산자와 같은 조건으로 반환 값을 반환한다.
+
+  ```ruby
+  %w(Alice Bob Charlie).sort {|a, b| a.length <=> b.length }	#=> {"Bob", "Alice", "Charlie"}
+  ```
+
+- `Numeric#step`: 반복 처리 메소드. 시작 값이  수치 자신이며 종료 값이 첫번째 인수이다.
+
+  ```ruby
+  3.step 5 do |num|
+  	puts num
+  end					# "3" "4" "5"를 순서대로 출력
+  
+  1.2.step 2.0, 0.2 do |num|		# 두번째 인수로 증가분을 설정할 수도 있다.
+    puts num
+  end					# 1.2 1.4 1.6 1.8 2.0 순서대로 출력.
+  ```
+
+### Rational
+
+`Kernel.#Rational` 는 유리수를 표현한다. 첫 번째 인수에는 분자, 두 번째 인수에는 분모를 지정한다.
+
+```ruby
+r = Rational(1, 3)	#=> (1/3)
+
+r.denominator				#=> 3		분모를 취득
+r.numerator					#=> 1		분자를 추득
+r.to_f							#=> 0.33333333333		부동소수점으로 변환
+```
+
+나눗셈을 할 때 `/`가 아닌 `Numeric#quo` 메소드를 사용하면, 반환 값을 Rational 객체로 취득할 수 있다.
+
+```ruby
+r = 3.quo(10)			#=> (3/10)
+```
+
+### Complex
+
+`Kernel.#Complex`는 복소수를 표현한다. 첫 번째 인수는 실수부를, 두 번째 인수는 허수부를 지정한다. 두 번째 인수를 생략하면 0이 사용된다. 첫번째 인수로 문자열이 주어지면 복소수를 표현한 문자로 해석된다.
+
+```ruby
+c = Complex(2, 3)
+c.real			# => 2
+c.imaginary	#	=> 3
+
+Complex(2)			#=> (2+0i)
+Complex('2+2i')	#=> (2+2i)
+```
+
+### String
+
+핵 유용할 예정이다. 메소드를 훑자~!
+
+- `empty?`: 비었는지 여부
+- `length`: 길이
+- `bytesize`: 문자열의 바이트 수
+- `include`: 인수에 지정한 문자열을 포함하고 있는가?
+- `start_with`: 지정한 문자열로 시작하는가?
+
+문자열은 수정이 가능한 객체라 `<<`을 사용하면 '파괴적으로' 변경할 수 있다.
+
+```ruby
+str = 'Pine'
+str << 'apple'	#=> 'Pineapple'
+str							#=> 'Pineapple'
+```
+
+- `slice` : 문자열의 특정 부분만 취득. 정규표현으로 지정 가능.
+
+- `[]`: slice의 간단 구문
+
+  ```ruby
+  str = 'The Answer to life, the universe, and everything: 42'
+  str[4..9]		#=> 'Answer'
+  ```
+
+- `strip`: 문자열 전후의 공백문자를 제거. `rstrip`, ` lstrip` 도 있다.
+
+- `chop`: 문자 종류에 상관없이 문자열 끝에 있는 문자 하나를 제거
+
+- `shomp`: 문자열 끝에 있는 줄바꿈 코드를 하나만 제거
+
+- `squeeze`: 문자열 내 중복문자를 하나로 모은다. 첫 번째 인수에 모을 대상이 되는 문자를 지정할 수도 있다.
+
+- `downcase`, `upcase`, `swapcase`, `capitalize` : 문자열내 대소문자 변환처리
+
+- `sub`: 특정 패턴에 일치한 첫 번째 문자열을 변환. 첫 번째 인수는 정규 표현으로 지정, 두 번째 인수는 치환대상
+
+  ```ruby
+  '24-1-365'.sub(/[0-9]+/, 'x') #=> 'x-1-365'
+  ```
+
+- `gsub`: 일치하는 패턴 다 바꾸려면 이걸 사용하자.
+
+원본을 변경하고 싶으면 `!`를 붙여보자.
+
+```ruby
+str = ' hi '
+str.strip!			#=> 'hi'
+```
+
+- `split`: 문자열 안의 특정 문자를 구분자로 분할해서 배열로 변경.
+
+  ```ruby
+  '42seoul'.split(//)			#=> ['4', '2', 's', 'e', 'o', 'u', 'l']
+  '42seoul'.each_char.to_a			#=> ['4', '2', 's', 'e', 'o', 'u', 'l']
+  ```
+
+반복처리에는 메소드명이 each로 시작하는 메소드를 사용한다.
+
+- `each_char`: 문자 단위 반복
+- `each_btyes`: 바이트 단위 반복
+- `each_line`: 행 단위 반복. 줄바꿈 문자열을 따로 지정하는 것도 가능하다.
+
+모든 문자열은 인코딩 정보를 가지고 있으며, 이를 변경할 수 있다.
+
+- `encoding` : 인코딩 정보를 Encoding 객체로 반환한다. 무슨 인코딩인지 확인할 때 사용.
+- `encode`: 문자열을 특정 인코딩으로 변환.
 
 
 
+### Enumerable 객체
+
+Array, Hash, Range 등 객체 집합을 표현하는 클래스에는 Enumerable이 include 되어 있다. 객체 집합을 조작할 때 세상편해진다.
+
+```ruby
+#반복과 함께 값이 증가
+%w(A B C).each_with_index do |num, index|
+	puts '#{index}: #{name}'
+end		# '0: A' '1: B' '2: C'
+
+# 뒤에서부터 역순으로 반복
+(1..3).reverse_each do |val|
+	puts val
+end		# '3' '2' '1' 순서대로 출력
+
+# 요소를 n회씩 나누어 반복
+(1..5).each_slice 2 do |a, b|
+	p [a, b]
+end	# '[1, 2]' '[3, 4]' '[5, nil]' 순서대로 출력
+
+# n개로 연결된 요소를 하나씩 물려서 반복
+(1..4)each_cons 2 do |a, b|
+	p [a, b]
+end	# '[1,2]' '[2,3]' '[3,4]'
+
+# 리시버 요소를 처음부터 끝까지 무한 반복
+(1..3).cycle do |n|
+  	puts n
+end		# '1', '2', '3' ... 계속 출력
+```
+
+참고로 Timer 객체나 Float 객체 등과 같이 such 메소드가 없는 객체를 사용해서 범위 객체를 정의했을 때는 반복 처리를 할 수 없다.
+
+요소가 특정 조건을 만족하는지 판별할 수 있다. 아래 요소들은 블록이랑 같이 처리하는 것도 가능하다.
+
+- `all?`: 모든 요소가 참인지 판별
+- `none?`: 모든 요소가 거짓인지 판별
+- `any?`: 하나라도 참이 있는지 판별
+- `one?`: 하나만 참인지 판별
+
+```ruby
+[4, 4, 2, 3].all? {|v| v.is_a?(Integer)}	#=> true
+```
+
+부분요소를 가져올 수도 있다.
+
+- `grep`: 특정 조건을 만족하는 요소를 `===`로 비교해서 true가 되는 요소의 배열을 반환한다.
+- `detect`: 반환 값이 처음으로 true 가 되는 요소를 반환
+- `select`: 블록의 각 요소에 대해 실행해서 블록 반환 값이 true인 모든 요소를 반환
+- `take`: 앞에서부터 지정한 수만큼의 요소를 배열로 반환
+- `take_while`: 블록이 처음으로 false를 반환할 때까지의 요소를 배열로 반환
+- `drop_while`: 블록이 청므으로 false를 반환한 후 요소를 배열로 반환
+
+복합연산도 간단하게 처리 가능하다.
+
+- `inject` : 리시버에 대한 복합 연산을 수행한다.
+
+  ```ruby
+  # 초기값 설정이 가능하다.
+  [4, 4, 2, 3].inject(0) {|result, num|
+  	result += num
+  }	#=> 13
+  
+  # 초기값 생략시 가장 첫번째 요소가 초깃값으로 설정됨.
+  [4, 4, 2, 3].inject {|result, num|
+    result += num
+  }	#=> 13
+  ```
+
+- `each_with_object` : 요소를 반복하며 객체를 갱신해 가는 처리에 적합하다. `each_with_object` 인수에는 초깃값이 되는 객체를 지정한다. 이 객체는 반복 때마다 블록 인수로 사용되며 최종적으로는 반환 값이 된다.
+
+  ```ruby
+  %w(Alice Bob Charlie).each_with_object({}) {|name, result|
+  	result[name] = name.length
+  }	#=> {'Alice'=>5, 'Bob'=>3, 'Charlie'=>7}
+  ```
+
+- `group_by`, `partition`: 특정 조건으로 요소를 그루핑
+
+- `max`, `min`, `minmax` : 각 요소를 <=> 연산자로 비교하여 최솟값, 최댓값을 얻는다.
+
+
+
+sort는 비교할 때마다 두 개 요소의 메소드를 호출해야한다. 반면, sort_by는 메소드 호출은 요소 단위로 한 번만 하면 된다. 따라서 요소별 메소드 실행 시간이 길면 sort 쪽이 실행에 많은 시간이 걸린다.
+
+
+
+### Array
+
+꽤 신선한데 쓸만해보이는 메소드를 정리해보자.
+
+- `compact`: 배열 요소에서 nil을 제거한 새로운 배열을 반환한다.
+
+- `uniq`: 중복 요소를 제거한 새로운 배열을 반환한다. 중복여소는 `eql?` 메소드로 판별한다.
+
+- `flatten`: 배열의 배열(다차원 배열)을 일차언으로 변경한 새로운 배열을 반환한다.
+
+- `tranpose`: 배열을 행과열로 간주해서 둘을 서로 바꾸어 새로운 배열을 반환한다.
+
+- `zip`: 자신과 인수에 지정한 배열을 결합해서 다차원 배열을 생성한다.
+
+  ```ruby
+  array = [1, 'a']
+  array.zip([2, 'b'], [3, 'c']) #=> [[1,2,3], ['a','b','c']]
+  ```
+
+- `join`: 배열의 요소들을 모두 연결해서 문자열을 반환한다.
+
+  ```ruby
+  array = [24, 1, 365]
+  array.join 			#=> '241365'
+  array.join('-')	#=>	'24-1-365'
+  ```
+
+
+
+### Hash
+
+파괴적 조작에 의해 해시 값이 변경될 가능성이 있는 객체는 키로 적합하지 않은데, 키가 되는 객체의 해시 값이 변경되면 키와 값을 연결할 수 없기 때문이다.  문자열 객체도 변경 가능한 객체지만, 편리성을 위해 예외를 두고 있다. 문자열을 해시 키로 사용하는 경우는 문자열을 복사해서 이용하므로 원 객체가 변경되어도 영향을 받지 않는다.
+
+하단은 메소드 메모!
+
+- `merge`: 해시 두 개를 하나로 모아서 새로운 해시를 반환한다. 키가 중복된 경우에는 인수에 지정한 해시가 우선시되어 덮어쓰기 한다.
+- `invert`: 키와 값을 뒤바꾼다.
+- `has_key?`: 키가 있는지 확인한다.
+- `has_value?`: 값이 있는지 확인한다.
+- `keys`, `values`: 각각 모든 키와 값을 배열로 반환한다.
+- `new`: 첫번째 인수로 초깃값을 지정할 수 있다. 그럼 존재하지 않는 키를 참조했을 때 nil 대신 이 초기값을 반환한다.
+
+
+
+### Enumerator
+
+- `lazy`: 매우 큰 배열이나 무한 요소를 가진 객체 집합을 손쉽게 처리한다. 
+
+  ```ruby
+  (0..Float::INFINITY).map { |n| n.succ }.select {|n| n.odd? }.take(3) # 결과가 반환되지 않음.
+  
+  (0..Float::INFINITY).lazy.map { |n| n.succ }.select {|n| n.odd? }.take(3)
+  odd_numbers.force #=> [1,3,5]
+  ```
+
+  이처럼 요소 반복 시마다 필요한 부분만 실행된다.
+
+
+
+
+
+# 6장 루비의 클래스 객체
+
+클래스에서 사용할 수 있는 대부분의 메소드는 Module 클래스에 정의되어있는 것이다. Module과 Class의 차이는 아래 두 가지 뿐이다.
+
+1. Class는 인스턴스를 작성할 수 있다.
+2. Class는 상속하거나 상속될 수 있다.
+
+### class 정의식과 Class.new
+
+둘은 스코프에서 차이가 있다.
+
+```ruby
+external_scope = 1
+
+class ExpDefineClass
+	puts external_scope	# NameError 발생
+end
+
+NewDefineClass = Class.new do
+	puts external_scope # 1을 출력
+end
+```
+
+즉, Class.new는 클래스를 블록으로 정의하기 때문에 바깥쪽 스코프를 참조할 수 있다. 동적으로 클래스를 정의해야할 때 유용하다.
+
+### 싱글톤 클래스
+
+루비에는 싱글톤 클래스 외에도 '싱글톤'이라는 명칭이 붙는 기능이 있는데, 이것이 바로 싱글톤 메소드다. 싱글톤 메소드 또한 특정 객체와 연계되는 메소드다. 싱글톤 클래스는 사실 싱글톤 메소드를 정의할 때 해당 싱글톤 메소드가 정의되는 클래스이다.
+
+일반 클래스와 싱글톤 클래스의 차이는 이 [싱글톤 패턴을 쓰는 이유와 문제점](https://jeong-pro.tistory.com/86)을 참고해보자.
+
+싱글톤 메소드 호출시에는 싱글톤 클래스에 정의된 메소드를 먼저 탐색하고 서브클래스에 정의된 메소드, 슈퍼클래스에 정의된 메소드 순으로 탐색한다.
+
+그 외 메소드들 간단 정리
+
+- `prepend`: include 된 여러 모듈, 클래스가 있더라도 prepend에 있는 것이 먼저 호출된다. 모듈 내에서 사용하는 변수 등을 초기화해야할 때 써먹기 좋다.
+
+
+
+### eval family
+
+루비의 eval family는 네 가지 메소드가 있다.
+
+| 메소드명                  | 동작                                                         |
+| ------------------------- | ------------------------------------------------------------ |
+| Kernel.#eval              | self가 호출된 위치를 식으로 평가. 인수에 지정한 문자열을 식으로 인식해서 처리. |
+| Module#class_eval         | 리시버 클래스를 self로 해서 식을 평가                        |
+| Module#module_eval        | 리시버 모듈을 self로 해서 식을 평가                          |
+| BasicObject#instance_eval | 리시버 객체를 self로 해서 식을 평가                          |
+
+### eval과 Binding 객체
+
+Binding 객체는 특정 구문으로 정의된 변수나 메소드를 모아 둔 객체이다.
+
+Binding 객체를 사용하면 식을 평가할 때 `Kernel.#eval`로 사용할 구문을 지정할 수 있다. `Kernel.#eval`의 두 번째 인수에 Binding 객체를 지정하면, 식이 Binding 객체의 스코프로 평가된다.
+
+흠.. 아래 예시를 보자!
+
+```ruby
+class EvalTarget
+	def initialize
+		@instance_val = 'instance valiable'
+	end
+	
+	def instance_binding
+		local_val = 'local valiable'
+		binding
+	end
+	
+	private
+	def private_method
+		'private method'
+	end
+end
+
+el = EvalTarget.new
+binding_obj = el.instance_binding
+
+eval '@instance_val', binding_obj     #=> 'instance valiable'
+eval 'local_val', binding_obj					#=> 'local valiable'
+eval 'private_method', binding_obj		#=> 'private method'
+
+# Binding 객체에도 eval 메소드가 정의되어 있어서 아래처럼 사용해도 동일한 처리가 가능하다.
+binding_obj.eval '@instance_val'		#=> 'instance valiable'
+binding_obj.eval 'local_val'				#=>	'local valiable'
+binding_obj.eval 'private_method'		#=> 'private method'
+```
+
+이거쓰면 유지보수하기 힘들어질 것만 같아서 찾아보니 장단점이 있다. [링크](https://hashcode.co.kr/questions/2756/ruby에서-eval의-정확한-역할이-뭔가요-그리고-쓰면-안좋다는데-정말-그런가요)안의 링크들도 한번 읽어보면 안쓰는게 나을듯.
+
+- 장점: 동적 구문 생성, 바인딩, 실행으로 메타프로그래밍에 유용
+- 단점: 느림, 스코프를 넘어선 자원 접근, 보안 취약 유발
+
+
+
+# 8장 Proc 객체
+
+블록을 사용하면 메소드 호출 측에서 작성한 처리를 메소드에 전달할 수가 있지만, 블록은 메소드 하나당 하나만 지정할 수 있다. 또한, 객체가 아니므로 변수에 저장해서 반복 사용할 수 있다.
+
+블록의 이런 특성 및 한계를 벗어나 특정 처리를 객체로 추상화한 것이 Proc객체이다. 구체적으로 아래 상황에서 쓰인다.
+
+- 메소드에 복수의 블록을 지정하고 싶을 때
+- 블록을 객체로 사용하고 싶을 때
+
+Proc 클래스는 블록을 객체로 만드는 클래스다. 아래처럼 쓴다.
+
+```ruby
+proc_obj = Proc.new {|a| a } #=> #<Proc:0x007f97d8ade2e8@(irb):1>
+```
+
+Proc 객체를 생성한 후, 객체 생성 시에 사용한 블록에 인수를 전달하려면 `Proc#call` 메소드에 인수를 지정하면 된다.
+
+`Proc.new` 메소드의 인수에 블록을 지정하지 않으면, `Proc.new` 메소드를 호출한 메소드에 지정된 블록이 사용된다.
+
+블록이 없는 `Proc.new`를 호출한 메소드에도 블록이 없으면 ArgumentError가 발생한다.
+
+`Kernel.#proc` 메소드로 Proc 객체를 생성할 수도 있다.
+
+Proc 객체의 === 메소드는 다른 객체의 === 메소드와 달리 Proc 객체를 실행한다.
+
+
+
+### Proc 객체와 블록
+
+루비의 메소드는 블록을 지정해서 `yield` 메소드로 평가할 수 있으며, 메소드에 지정된 블록을 Proc 객체로 받을 수도 있다.
+
+블록을 Proc 객체로 받으려면 메소드 인수에 블록 인수를 지정한다. 블록 인수를 이용하면 메소드 호출 시에 지정한 블록을 Proc 객체로 처리할 수 있다.
+
+```ruby
+# coding: utf-8
+
+def convert_proc(&block)
+	block
+end
+
+proc_obj = convert_proc { 1 }
+proc_obj.call #-> 1
+```
+
+
+
+### Proc#curry
+
+'x'와 'y'같이 복수의 인수를 사용하는 함수에 'x'만 특정 값을 설정해 두고 'y'는 인수로 사용하는 새로운 함수를 만들 수 있는데, 이것을 커리(curry)화라고 한다.
+
+Proc#curry라는 메소드로 커리화가 가능하다.
+
+```ruby
+# coding: utf-8
+
+add = Proc.new {|x, y| x + y}
+inc = add.curry.(1)
+
+inc.(2)
+
+append_prefix_atmark = add.curry.('@')
+append_prefix_atmark.('takkanm')			#=> '@takkanm'
+```
+
+
+
+### Kernel.#lambda
+
+```ruby
+lambda_obj = lambda { 1 }
+
+lambda_obj.class 	#=> Proc
+lambda_obj.call		#=> 1
+```
+
+요걸 간단히 기술하려면 `->`을 사용하면 된다. `->`가 람다 기호랑 비슷해서 만들어졌다고 한다ㅎㅎ
+
+```ruby
+# -> (가인수 리스트) {처리}
+inc = ->(x) {x + 1}
+
+inc.(1) #=> 2
+```
+
+
+
+### Proc.new / Kernel.#proc / Kernel.lambda
+
+Proc 객체를 중간에 처리중단할 때 차이점이 있다.
+
+| 차이점 | Proc.new             | Kernel.#proc         | Kernel.#lambda     |
+| ------ | -------------------- | -------------------- | ------------------ |
+| return | 메소드를 빠져나간다. | 메소드를 빠져나간다. | 제어를 빠져나간다. |
+| break  | 예외가 발생한다.     | 예외가 발생한다.     | 제어를 빠져나간다. |
+
+`return`과 `break`를 구별해서 쓰기 헷갈리지 않는가. 그래서 Proc이나 lambda 내에서 처리를 중단하고 싶을 때는 걍 블록 처리 중단과 마찬가지로 `next`를 사용하는 것도 좋다.
+
+
+
+한편 인수 개수에 따라서도 동작이 다르다.
+
+`Proc.new` 로 작성한 객체의 인수는 다음과 같이 동작한다.
+
+- 가인수의 수보다 많은 인수가 전달되면 무시한다.
+- 인수 수가 부족하면 부족한 인수에는 nil이 전달된다.
+- 복수의 가인수가 정의되어 있을 때, 배열이 하나만 전달되면 가인수에 맞추어 전개된다.
+
+반면 `Kernel.#lambda`로 작성한 객체는 일반 메소드와 마찬가지로 ArgumentError가 발생한다.
+
+이런 차이가 있다보니 `Proc#call`을 사용해서 Proc 객체를 실행할 때는 차이가 있다는 것을 확실히 의식할 필요가 있다. `Proc#lambda?` 같은 메소드로 lambda인지 여부를 확인하고 쓰는 것도 한 방법이다.
+
+
+
+### 루비의 클로저
+
+클로저(Closure)란, 인수 이외에도 함수 정의 시에 포함되는 변수 등의 정보를 가지는 함수 객체를 말한다.
+
+루비에서는 Proc 객체가 클로저처럼 동작할 수 있다. Proc 객체도 Proc 객체가 만들어진 구문의 객체를 보유하고 있어서, 해당 객체를 반복해서 사용할 수 있다.
+
+```ruby
+def create_proc
+	str = 'from create_proc'
+	Proc.new {str}
+end
+
+proc_obj = create_proc
+
+str = 'from toplevel'
+# proc_obj 내에서 호출된 str은 create_proc	내의 str을 참조하고 있다.
+proc_obj.call #=> 'from create_proc'
+```
+
+또한 proc_obj 내에서 참조하고 있는 객체 상태가 Proc 객체 정의 후에 변경되면, 실행 시점의 객체 상태가 참조된다.
+
+```ruby
+str = 'from toplevel'
+top_level_proc = Proc.new { str }
+to_level_proc.call #=> 'from toplevel'
+
+# top_level_proc 내의 str이 참조하고 있는 객체를 변경하면 call 결과도 바뀐다.
+str += ' append strings'
+top_level_proc.call #=> 'from toplevel append strings'
+```
+
+
+
+# 9장 Method 클래스
+
+루비에서는 객체가 가지는 메소드도 객체로 취급할 수 있다. 바로 Method 객체다. 아래처럼 객체가 가지고 있는 메소드를 구체화할 수 있다.
+
+```ruby
+array = [1,2,3,4,5]
+array_shift = array.method(:shift)
+
+array_shift.call # => 1
+```
+
+관련 메소드로 인수의 정보나 메소드 소유자/이름/리시버를 취득할 수 있다.
+
+
+
+### Method 객체와 Proc 객체
+
+둘 중에서는 클로저로 활용할 수 있는 Proc 객체를 사용하는 경우가 많다.
+
+반면, Method 객체는 특정 처리와 그것을 적용할 객체가 고정되어있으므로 해당 처리를 반복해서 호출할 필요가 있을 때 유용하다.
+
+
+
+---
+
+
+
+#  ruby 2.0~2.7.1 release note
+
+책에 기술된 Ruby의 버전은 2.0버전이다. 2020년 현재 2.7.1버전까지 버전업되며 달라진 부분들을 훑었다. 다행히 막 특기할만한 내용은 없는듯하다.
+
+- [2.1.0 release note](https://www.ruby-lang.org/ko/news/2013/12/25/ruby-2-1-0-is-released/)
+- [2.2.0 release note](https://www-ruby-lang.herokuapp.com/ko/news/2014/12/25/ruby-2-2-0-released/)
+- [2.3.0 release note](https://www.ruby-lang.org/ko/news/2015/12/25/ruby-2-3-0-released/)
+- [2.4.0 release note](https://www.ruby-lang.org/ko/news/2016/12/25/ruby-2-4-0-released/)
+- [2.5.0 release note](https://www.ruby-lang.org/ko/news/2017/12/25/ruby-2-5-0-released/)
+  - ~~`Object#yield_self` 메서드 추가~~
+- [2.6.0 release note]()
+  - [루비 2.6 릴리즈 및 주요 문법 변경사항 소개 by 44bits](https://www.44bits.io/ko/post/ruby-2-6-0-released-and-changes)
+  - 키워드 인자의 키 객체로 심볼이 아닌 값을 사용할 수 없도록 변경됨.
+  - 해시 만들 때 `map` 호출할 필요없이  `to_h` 메서드로 한방에 처리 가능.
+  - `Object#yield_self`가 `then`으로 이름 바뀜.
+  - `Hash#merge`가 여러 개 인자를 받도록 변경.
+  - `split`에 블록 받을 수 있음.
+- [2.7.0 release note](https://www.ruby-lang.org/ko/news/2019/12/25/ruby-2-7-0-released/)
+  - [루비 2.7 릴리즈 및 주요 문법 변경사항 소개 by 44bits](https://www.44bits.io/ko/post/news--ruby-2-7-released)
+  - 패턴 매칭 기능
 
 
 
