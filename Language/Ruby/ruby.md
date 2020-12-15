@@ -27,11 +27,11 @@
 
 [6장. 루비의 클래스 객체](https://github.com/humblEgo/TIL/blob/master/Language/Ruby/ruby.md#6%EC%9E%A5-%EB%A3%A8%EB%B9%84%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4-%EA%B0%9D%EC%B2%B4)
 
-[7. 동적 프로그래밍]()
+[7장 동적 프로그래밍](https://github.com/humblEgo/TIL/blob/master/Language/Ruby/ruby.md#7%EC%9E%A5-%EB%8F%99%EC%A0%81%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)
 
-[8. Proc 객체](https://github.com/humblEgo/TIL/blob/master/Language/Ruby/ruby.md#8%EC%9E%A5-proc-%EA%B0%9D%EC%B2%B4)
+[8장 Proc 객체](https://github.com/humblEgo/TIL/blob/master/Language/Ruby/ruby.md#8%EC%9E%A5-proc-%EA%B0%9D%EC%B2%B4)
 
-[9. Method 클래스](https://github.com/humblEgo/TIL/blob/master/Language/Ruby/ruby.md#9%EC%9E%A5-method-%ED%81%B4%EB%9E%98%EC%8A%A4)
+[9장 Method 클래스](https://github.com/humblEgo/TIL/blob/master/Language/Ruby/ruby.md#9%EC%9E%A5-method-%ED%81%B4%EB%9E%98%EC%8A%A4)
 
 10. 루비의 리플렉션 프로그래밍
 
